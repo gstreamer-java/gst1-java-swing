@@ -4,7 +4,7 @@
   
   <groupId>org.freedesktop.gstreamer</groupId>
   <artifactId>gst1-java-swing</artifactId>
-  <version>0.9.0-SNAPSHOT</version>
+  <version>0.9.0</version>
   <packaging>jar</packaging>
 
   <name>GStreamer 1.x Java Swing</name>

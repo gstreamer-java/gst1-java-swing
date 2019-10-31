@@ -1,8 +1,6 @@
 /* 
  * Copyright (c) 2019 Neil C Smith
  * Copyright (c) 2007 Wayne Meissner
- * 
- * This file is part of gstreamer-java.
  *
  * This code is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License version 3 only, as
@@ -52,14 +50,14 @@ import org.freedesktop.gstreamer.FlowReturn;
 import org.freedesktop.gstreamer.Sample;
 
 /**
- *
+ * A Swing component for displaying video from a GStreamer pipeline.
  */
 public class GstVideoComponent extends javax.swing.JComponent {
 
     private final Lock bufferLock = new ReentrantLock();
     private final AppSink videosink;
     private final boolean useVolatile;
-    
+
     private BufferedImage currentImage = null;
     private RenderComponent renderComponent = new RenderComponent();
     private boolean keepAspect = true;
@@ -69,14 +67,15 @@ public class GstVideoComponent extends javax.swing.JComponent {
     private volatile boolean updatePending = false;
 
     /**
-     * Creates a new instance of GstVideoComponent
+     * Create a GstVideoComponent. A new AppSink element will be created that
+     * can be accessed using {@link #getElement()} and added to a pipeline.
      */
     public GstVideoComponent() {
         this(new AppSink("GstVideoComponent"));
     }
 
     /**
-     * Creates a new instance of GstVideoComponent
+     * Create a GstVideoComponent wrapping the provided AppSink element.
      */
     public GstVideoComponent(AppSink appsink) {
         this.videosink = appsink;
@@ -182,10 +181,21 @@ public class GstVideoComponent extends javax.swing.JComponent {
         }
     };
 
+    /**
+     * Get the wrapped AppSink element.
+     *
+     * @return sink element
+     */
     public Element getElement() {
         return videosink;
     }
 
+    /**
+     * Set whether to respect the aspect ratio of the video when scaling.
+     * Defaults to true.
+     *
+     * @param keepAspect respect aspect ratio
+     */
     public void setKeepAspect(boolean keepAspect) {
         this.keepAspect = keepAspect;
     }
